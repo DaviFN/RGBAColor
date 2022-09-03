@@ -52,7 +52,7 @@ class RGBAColor
         color = color | alpha;
     }
 
-    public:
+    private:
     uint32_t color = 0x000000ff;
 };
 
