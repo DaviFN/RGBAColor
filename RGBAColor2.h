@@ -1,9 +1,9 @@
-#ifndef RGBACOLOR_H
-#define RGBACOLOR_H
+#ifndef RGBACOLOR2_H
+#define RGBACOLOR2_H
 
 #include <stdint.h>
 
-class RGBAColor
+class RGBAColor2
 {
     public:
     inline uint8_t getRed() const

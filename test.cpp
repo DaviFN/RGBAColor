@@ -2,31 +2,31 @@
 #include <cstdlib>
 #include <ctime>
 
-#include "RGBAColor.h"
-#include "NaiveRGBAColor.h"
+#include "RGBAColor1.h"
+#include "RGBAColor2.h"
 
 bool someErrorOccurred = false;
 
-bool representSameColor(const RGBAColor& rgbaColor, const NaiveRGBAColor& naiveRgbaColor)
+bool representSameColor(const RGBAColor1& rgbaColor1, const RGBAColor2& rgbaColor2)
 {
-    return rgbaColor.getRed() == naiveRgbaColor.getRed() && rgbaColor.getGreen() == naiveRgbaColor.getGreen() && rgbaColor.getBlue() == naiveRgbaColor.getBlue() && rgbaColor.getAlpha() == naiveRgbaColor.getAlpha();
+    return rgbaColor1.getRed() == rgbaColor2.getRed() && rgbaColor1.getGreen() == rgbaColor2.getGreen() && rgbaColor1.getBlue() == rgbaColor2.getBlue() && rgbaColor1.getAlpha() == rgbaColor2.getAlpha();
 }
 
-void printRgbaColor(const RGBAColor& rgbaColor) {
-    printf("R: %d, G: %d, B: %d, A: %d", rgbaColor.getRed(), rgbaColor.getGreen(), rgbaColor.getBlue(), rgbaColor.getAlpha());
+void printRgbaColor1(const RGBAColor1& rgbaColor1) {
+    printf("R: %d, G: %d, B: %d, A: %d", rgbaColor1.getRed(), rgbaColor1.getGreen(), rgbaColor1.getBlue(), rgbaColor1.getAlpha());
 }
 
-void printNaiveRgbaColor(const NaiveRGBAColor& naiveRgbaColor) {
-    printf("R: %d, G: %d, B: %d, A: %d", naiveRgbaColor.getRed(), naiveRgbaColor.getGreen(), naiveRgbaColor.getBlue(), naiveRgbaColor.getAlpha());
+void printRgbaColor2(const RGBAColor2& rgbaColor2) {
+    printf("R: %d, G: %d, B: %d, A: %d", rgbaColor2.getRed(), rgbaColor2.getGreen(), rgbaColor2.getBlue(), rgbaColor2.getAlpha());
 }
 
-void compareAndWarnIfDifferent(const RGBAColor& rgbaColor, const NaiveRGBAColor& naiveRgbaColor)
+void compareAndWarnIfDifferent(const RGBAColor1& rgbaColor1, const RGBAColor2& rgbaColor2)
 {
-    if(!representSameColor(rgbaColor, naiveRgbaColor)) {
-        printf("don't represent same color;\nrgbaColor: ");
-        printRgbaColor(rgbaColor);
-        printf("\nnaiveRgbaColor: ");
-        printNaiveRgbaColor(naiveRgbaColor);
+    if(!representSameColor(rgbaColor1, rgbaColor2)) {
+        printf("don't represent same color;\nrgbaColor1: ");
+        printRgbaColor1(rgbaColor1);
+        printf("\nrgbaColor2: ");
+        printRgbaColor2(rgbaColor2);
         printf("\n");
         someErrorOccurred = true;
     }
@@ -44,10 +44,10 @@ uint8_t randomColorComponent() {
 
 int main()
 {
-    RGBAColor rgbaColor;
-    NaiveRGBAColor naiveRgbaColor;
+    RGBAColor1 rgbaColor1;
+    RGBAColor2 rgbaColor2;
 
-    compareAndWarnIfDifferent(rgbaColor, naiveRgbaColor);
+    compareAndWarnIfDifferent(rgbaColor1, rgbaColor2);
 
     initializeRNGSeed();
 
@@ -67,21 +67,21 @@ int main()
         uint8_t blue = randomColorComponent();
         uint8_t alpha = randomColorComponent();
 
-        rgbaColor.setRed(red);
-        rgbaColor.setGreen(green);
-        rgbaColor.setBlue(blue);
-        rgbaColor.setAlpha(alpha);
+        rgbaColor1.setRed(red);
+        rgbaColor1.setGreen(green);
+        rgbaColor1.setBlue(blue);
+        rgbaColor1.setAlpha(alpha);
 
-        naiveRgbaColor.setRed(red);
-        naiveRgbaColor.setGreen(green);
-        naiveRgbaColor.setBlue(blue);
-        naiveRgbaColor.setAlpha(alpha);
+        rgbaColor2.setRed(red);
+        rgbaColor2.setGreen(green);
+        rgbaColor2.setBlue(blue);
+        rgbaColor2.setAlpha(alpha);
 
-        compareAndWarnIfDifferent(rgbaColor, naiveRgbaColor);
+        compareAndWarnIfDifferent(rgbaColor1, rgbaColor2);
     }
 
     if(someErrorOccurred) {
-        printf("there is a least one error");
+        printf("there is a least one difference");
     }
 
     printf("end.");

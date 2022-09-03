@@ -1,9 +1,9 @@
-#ifndef NAIVERGBACOLOR_H
-#define NAIVERGBACOLOR_H
+#ifndef RGBACOLOR1_H
+#define RGBACOLOR1_H
 
 #include <stdint.h>
 
-class NaiveRGBAColor
+class RGBAColor1
 {
     public:
     uint8_t getRed() const
